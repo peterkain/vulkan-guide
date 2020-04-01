@@ -2,13 +2,16 @@
 #include <iostream>
 #include "types.h"
 
-void ExitMsg(conststr& msg)
+[[maybe_unused]]
+static void ExitMsg(conststr& msg)
 {
 	std::cerr << msg << '\n';
 	std::exit(EXIT_FAILURE);
 }
 
-void Msg(conststr& msg)
+
+[[maybe_unused]]
+static void Msg(conststr& msg)
 {
 	std::cout << msg << std::endl;
 }

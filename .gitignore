@@ -1,2 +1,5 @@
 /vulkan-guide/build/*
 /.vs
+/vulkan-guide/.vs
+/vulkan-guide/Debug
+/vulkan-guide/x64/Debug
