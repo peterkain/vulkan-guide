@@ -19,7 +19,7 @@ VulkanExample::VulkanExample(conststr& name, uint32 version, [[maybe_unused]] bo
 
 
 VulkanExample::~VulkanExample() {
-	vkDestroyInstance(vkInstance, nullptr);
+	vkDestroyInstance(instance, nullptr);
 	if (glfwWindow) {
 		glfwDestroyWindow(glfwWindow);
 	}
@@ -67,7 +67,7 @@ void VulkanExample::CreateInstance(uint32 enabledLayerCount, const char* const* 
 	instanceInfo.enabledLayerCount = enabledLayerCount;
 	instanceInfo.ppEnabledLayerNames = enabledLayerNames;
 
-	if (vkCreateInstance(&instanceInfo, nullptr, &vkInstance) != VK_SUCCESS) {
+	if (vkCreateInstance(&instanceInfo, nullptr, &instance) != VK_SUCCESS) {
 		ExitMsg("Vulkan instance could not be created!");
 	}
 	else {

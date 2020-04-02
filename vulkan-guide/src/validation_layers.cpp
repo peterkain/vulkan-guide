@@ -12,6 +12,12 @@ ValidationLayers::ValidationLayers(conststr& name, uint32 version)
 }
 
 
+ValidationLayers::ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override)
+	: VulkanExample(name, version, true) {
+
+}
+
+
 void ValidationLayers::GetAvailableLayers() {
 	uint32 numLayers;
 	vkEnumerateInstanceLayerProperties(&numLayers, nullptr);
@@ -44,17 +50,6 @@ void ValidationLayers::AddValidationLayer(const char* const name) {
 }
 
 
-void ValidationLayers::_AddValidationLayer(const char* const name) {
-	if (CheckIfLayerValid(name)) {
-		validationLayers.push_back(name);
-		Msg("Layer "s + name + " added!");
-	}
-	else {
-		Msg("Layer "s + name + " rejected");
-	}
-}
-
-
 void ValidationLayers::CreateInstanceWithValidationLayers() {
 	CreateInstance(static_cast<uint32>(validationLayers.size()), validationLayers.data());
 }
@@ -78,10 +73,13 @@ void ValidationLayers::Execute() {
 			if (CheckIfLayerValid(input.c_str())) {
 				inputs.push_back(input);
 			}
+			else {
+				std::cout << "Layer " << input << " not valid" << std::endl;
+			}
 		}
 	}
 
-	validationLayers.reserve(inputs.size() + 1);
+	validationLayers.reserve(inputs.size());
 	std::transform(inputs.begin(), inputs.end(), std::back_inserter(validationLayers),
 				   [](std::string& s) {
 					   return s.c_str();

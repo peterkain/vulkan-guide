@@ -22,7 +22,7 @@ protected:
 	conststr name;
 	uint32 version;
 
-	VkInstance vkInstance;
+	VkInstance instance;
 
 	GLFWwindow* glfwWindow;
 	uint32 glfwNumExtensions;

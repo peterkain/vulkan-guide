@@ -14,12 +14,12 @@ public:
 	void Execute();
 
 protected:
+	ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override);
 	void GetAvailableLayers();
 	void PrintAvailableLayers();
 
 	std::vector<const char*> validationLayers;
 	std::vector<VkLayerProperties> availableLayers;
 
-private:
-	void _AddValidationLayer(const char* const name);
+	const char* const standardValidationLayer{"VK_LAYER_KHRONOS_validation"};
 };

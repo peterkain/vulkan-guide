@@ -134,10 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\physical_devices_and_queue_families.cpp" />
     <ClCompile Include="src\validation_layers.cpp" />
     <ClCompile Include="src\vulkan_example.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\physical_devices_and_queue_families.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\validation_layers.h" />
