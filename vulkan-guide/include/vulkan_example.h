@@ -8,7 +8,7 @@ class VulkanExample
 {
 public:
 	VulkanExample(conststr& name, uint32 version);
-	~VulkanExample();
+	virtual ~VulkanExample();
 
 	void Execute();
 	void GetSupportedExtensions();

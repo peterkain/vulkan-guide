@@ -27,6 +27,9 @@
     <ClCompile Include="src\physical_devices_and_queue_families.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\logical_device.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\vulkan_example.h">
@@ -42,6 +45,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\physical_devices_and_queue_families.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\logical_device.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
