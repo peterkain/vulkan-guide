@@ -38,7 +38,7 @@ bool PhysicalDevicesAndQueueFamilies::CheckPhysicalDevice(VkPhysicalDevice devic
 	// VkPhysicalDeviceProperties
 	// VkPhysicalDeviceFeatures
 	GetAvailableQueueFamilies(device);
-	QueueFamilyIndices indices{FindQueueFamilies(device, availableQueueFamilies)};
+	QueueFamilyIndices indices{FindQueueFamilies(availableQueueFamilies)};
 	return indices.graphicsFamily.has_value();
 }
 

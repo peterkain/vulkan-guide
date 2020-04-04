@@ -17,8 +17,7 @@ struct QueueFamilyIndices
 
 
 [[maybe_unused]]
-static QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device,
-	const std::vector<VkQueueFamilyProperties>& availableQueueFamilies) {
+static QueueFamilyIndices FindQueueFamilies(const std::vector<VkQueueFamilyProperties>& availableQueueFamilies) {
 	QueueFamilyIndices indices;
 
 	for (uint32 i{0}; i != availableQueueFamilies.size(); ++i) {

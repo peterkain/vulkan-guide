@@ -20,7 +20,7 @@ LogicalDevice::LogicalDevice(conststr& name, uint32 version, [[maybe_unused]] bo
 
 
 void LogicalDevice::CreateLogicalDevice() {
-	QueueFamilyIndices indices{FindQueueFamilies(physicalDevice, availableQueueFamilies)};
+	QueueFamilyIndices indices{FindQueueFamilies(availableQueueFamilies)};
 
 	VkDeviceQueueCreateInfo queueInfo{};
 	queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
