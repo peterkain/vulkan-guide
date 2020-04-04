@@ -2,7 +2,8 @@ project('vulkan-guide', 'cpp', default_options : ['cpp_std=c++17', 'warning_leve
 
 #add_global_arguments('GLFW_DLL', language : 'cpp')
 
-src = ['src/main.cpp', 'src/vulkan_example.cpp', 'src/validation_layers.cpp', 'src/physical_devices_and_queue_families.cpp']
+src = ['src/main.cpp', 'src/vulkan_example.cpp', 'src/validation_layers.cpp', 'src/physical_devices_and_queue_families.cpp',
+       'src/logical_device.cpp']
 inc_dirs = include_directories(['include', 'extern/include'])
 lib_dir = meson.current_source_dir() + '/extern/lib'
 
