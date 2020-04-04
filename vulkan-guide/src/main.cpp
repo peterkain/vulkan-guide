@@ -3,6 +3,7 @@
 #include "validation_layers.h"
 #include "physical_devices_and_queue_families.h"
 #include "logical_device.h"
+#include "surface.h"
 #include "utils.h"
 
 using namespace std;
@@ -18,8 +19,11 @@ int main() {
 	//PhysicalDevicesAndQueueFamilies example{"Choosing a Physical Device", VK_MAKE_VERSION(1, 0, 0)};
 	//example.Execute();
 
-	LogicalDevice example{"Creating a logical device from the physical device", VK_MAKE_VERSION(1, 0, 0)};
+	//LogicalDevice example{"Creating a logical device from the physical device", VK_MAKE_VERSION(1, 0, 0)};
+	//example.Execute();
+
+	Surface example{"Creating a surface", VK_MAKE_VERSION(1, 0, 0)};
 	example.Execute();
 	
-	std::cin.get();
+	//std::cin.get();
 }

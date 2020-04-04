@@ -11,7 +11,10 @@ public:
 	void Execute();
 
 protected:
+	LogicalDevice(conststr& name, uint32 version, [[maybe_unused]] bool _override);
+
 	void CreateLogicalDevice();
+	void CreateLogicalDevice(VkSurfaceKHR surface, VkQueue presentationQueue);
 	void SetDeviceFeatures(VkPhysicalDeviceFeatures features);
 
 	VkDevice logicalDevice;

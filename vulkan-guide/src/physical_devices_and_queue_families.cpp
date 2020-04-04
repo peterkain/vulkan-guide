@@ -9,7 +9,7 @@ PhysicalDevicesAndQueueFamilies::PhysicalDevicesAndQueueFamilies(conststr& name,
 }
 
 
-void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice() {
+void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice(std::function<bool(VkPhysicalDevice)> predicate) {
 	uint32 count;
 	vkEnumeratePhysicalDevices(instance, &count, nullptr);
 
@@ -21,7 +21,7 @@ void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice() {
 	vkEnumeratePhysicalDevices(instance, &count, availablePhysicalDevices.data());
 
 	for (const auto& device : availablePhysicalDevices) {
-		if (CheckPhysicalDevice(device)) {
+		if (predicate(device)) {
 			physicalDevice = device;
 			break;
 		}
@@ -37,37 +37,23 @@ bool PhysicalDevicesAndQueueFamilies::CheckPhysicalDevice(VkPhysicalDevice devic
 	// Can do checks to select best suitable device, but isn't needed
 	// VkPhysicalDeviceProperties
 	// VkPhysicalDeviceFeatures
-	QueueFamilyIndices indices{FindQueueFamilies(device)};
-	return indices.IsComplete();
+	GetAvailableQueueFamilies(device);
+	QueueFamilyIndices indices{FindQueueFamilies(device, availableQueueFamilies)};
+	return indices.graphicsFamily.has_value();
 }
 
 
-PhysicalDevicesAndQueueFamilies::QueueFamilyIndices
-PhysicalDevicesAndQueueFamilies::FindQueueFamilies(VkPhysicalDevice device) {
-	QueueFamilyIndices indices;
-
+void PhysicalDevicesAndQueueFamilies::GetAvailableQueueFamilies(VkPhysicalDevice device) {
 	uint32 count;
 	vkGetPhysicalDeviceQueueFamilyProperties(device, &count, nullptr);
 
 	availableQueueFamilies.resize(count);
 	vkGetPhysicalDeviceQueueFamilyProperties(device, &count, availableQueueFamilies.data());
-
-	for (uint32 i{0}; i != count; ++i) {
-		if (availableQueueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-			indices.graphicsFamily = i;
-		}
-
-		if (indices.IsComplete()) {
-			break;
-		}
-	}
-
-	return indices;
 }
 
 
 void PhysicalDevicesAndQueueFamilies::Execute() {
-	GetPhysicalDevice();
+	GetPhysicalDevice(getPhysicalDevicePredicate);
 
 	VkPhysicalDeviceProperties properties;
 	VkPhysicalDeviceFeatures features;
