@@ -52,7 +52,7 @@ PhysicalDevicesAndQueueFamilies::FindQueueFamilies(VkPhysicalDevice device) {
 	availableQueueFamilies.resize(count);
 	vkGetPhysicalDeviceQueueFamilyProperties(device, &count, availableQueueFamilies.data());
 
-	for (int i{0}; i != count; ++i) {
+	for (uint32 i{0}; i != count; ++i) {
 		if (availableQueueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
 			indices.graphicsFamily = i;
 		}
@@ -75,23 +75,21 @@ void PhysicalDevicesAndQueueFamilies::Execute() {
 	vkGetPhysicalDeviceProperties(physicalDevice, &properties);
 	vkGetPhysicalDeviceFeatures(physicalDevice, &features);
 
-
-
 	std::stringstream ss;
 	ss << "Some Properties about the Physical Device: " << '\n';
 	ss << "\tDevice Name: " << properties.deviceName << '\n';
 	ss << "\tDevice API version: ";
 	PrintVersion(ss, properties.apiVersion);
-	ss << "\tDevice Driver version: ";
+	ss << "\tDevice Vulkan Driver version: ";
 	PrintVersion(ss, properties.driverVersion);
 	ss << "\tDevice Max Framebuffer Width: " << properties.limits.maxFramebufferWidth << '\n';
 	ss << "\tDevice Max Framebuffer Height: " << properties.limits.maxFramebufferHeight << '\n';
 	ss << '\n';
 	ss << "Some Features of the Physical Device: " << '\n';
-	ss << "Device supports Geometry Shaders: " << features.geometryShader << '\n';
-	ss << "Device supports Tessellation Shaders: " << features.tessellationShader << '\n';
-	ss << "Device supports Blend operations with two sources: " << features.dualSrcBlend << '\n';
-	ss << "Device supports more than one active Viewport: " << features.multiViewport << '\n';
+	ss << "\tDevice supports Geometry Shaders: " << features.geometryShader << '\n';
+	ss << "\tDevice supports Tessellation Shaders: " << features.tessellationShader << '\n';
+	ss << "\tDevice supports Blend operations with two sources: " << features.dualSrcBlend << '\n';
+	ss << "\tDevice supports more than one active Viewport: " << features.multiViewport << '\n';
 
 	std::cout << ss.str() << std::endl;
 }
