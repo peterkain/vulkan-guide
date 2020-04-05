@@ -14,7 +14,7 @@ public:
 	void Execute();
 
 protected:
-	ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override);
+	//ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override);
 	void GetAvailableLayers();
 	void PrintAvailableLayers();
 

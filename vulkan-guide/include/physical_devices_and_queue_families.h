@@ -12,7 +12,7 @@ public:
 
 protected:
 	bool CheckPhysicalDevice(VkPhysicalDevice device);
-	void GetPhysicalDevice(std::function<bool(VkPhysicalDevice)> predicate);
+	void GetPhysicalDevice();
 	void GetAvailableQueueFamilies(VkPhysicalDevice device);
 
 	VkPhysicalDevice physicalDevice;

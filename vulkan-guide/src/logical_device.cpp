@@ -5,7 +5,7 @@
 
 LogicalDevice::LogicalDevice(conststr& name, uint32 version)
 	: PhysicalDevicesAndQueueFamilies(name, version), deviceFeatures{} {
-	GetPhysicalDevice(getPhysicalDevicePredicate);
+	GetPhysicalDevice();
 }
 
 
@@ -35,6 +35,7 @@ void LogicalDevice::CreateLogicalDevice() {
 	deviceInfo.pQueueCreateInfos = &queueInfo;
 	deviceInfo.queueCreateInfoCount = 1;
 	deviceInfo.pEnabledFeatures = &deviceFeatures;
+	deviceInfo.enabledExtensionCount = 0;
 
 	// Not needed anymore, but if using older drivers it would be required:
 	deviceInfo.enabledLayerCount = static_cast<uint32>(validationLayers.size());
@@ -50,7 +51,8 @@ void LogicalDevice::CreateLogicalDevice() {
 }
 
 
-void LogicalDevice::CreateLogicalDevice(VkSurfaceKHR surface, VkQueue presentationQueue) {
+void LogicalDevice::CreateLogicalDevice(VkSurfaceKHR surface, VkQueue& presentationQueue,
+										const std::vector<const char*>& requiredExtensions) {
 	QueueFamilyIndices indices{FindQueueFamilies(physicalDevice, surface, availableQueueFamilies)};
 
 	std::vector<VkDeviceQueueCreateInfo> queueInfos;
@@ -71,7 +73,8 @@ void LogicalDevice::CreateLogicalDevice(VkSurfaceKHR surface, VkQueue presentati
 	deviceInfo.pQueueCreateInfos = queueInfos.data();
 	deviceInfo.queueCreateInfoCount = static_cast<uint32>(queueInfos.size());
 	deviceInfo.pEnabledFeatures = &deviceFeatures;
-	deviceInfo.enabledExtensionCount = 0;
+	deviceInfo.enabledExtensionCount = static_cast<uint32>(requiredExtensions.size());
+	deviceInfo.ppEnabledExtensionNames = requiredExtensions.data();
 
 	// Not needed anymore, but if using older drivers it would be required:
 	deviceInfo.enabledLayerCount = static_cast<uint32>(validationLayers.size());

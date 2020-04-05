@@ -12,10 +12,10 @@ ValidationLayers::ValidationLayers(conststr& name, uint32 version)
 }
 
 
-ValidationLayers::ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override)
+/*ValidationLayers::ValidationLayers(conststr& name, uint32 version, [[maybe_unused]] bool _override)
 	: VulkanExample(name, version, true) {
 
-}
+}*/
 
 
 void ValidationLayers::GetAvailableLayers() {

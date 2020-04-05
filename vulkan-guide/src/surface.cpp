@@ -8,13 +8,18 @@ Surface::Surface(conststr& name, uint32 version)
 	CreateSurface();
 
 	getPhysicalDevicePredicate = std::bind(&Surface::CheckPhysicalDevice, this, std::placeholders::_1);
-	GetPhysicalDevice(getPhysicalDevicePredicate);
+	GetPhysicalDevice();
 	CreateLogicalDevice(surface, presentationQueue);
 }
 
 
 Surface::~Surface() {
 	vkDestroySurfaceKHR(instance, surface, nullptr);
+}
+
+
+Surface::Surface(conststr& name, uint32 version, [[maybe_unused]] bool _override)
+	: LogicalDevice{name, version, true} {
 }
 
 

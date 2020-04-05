@@ -3,13 +3,13 @@
 #include <sstream>
 
 PhysicalDevicesAndQueueFamilies::PhysicalDevicesAndQueueFamilies(conststr& name, uint32 version)
-	: ValidationLayers(name, version, true), physicalDevice{VK_NULL_HANDLE} {
+	: ValidationLayers(name, version), physicalDevice{VK_NULL_HANDLE} {
 	AddValidationLayer(standardValidationLayer);
 	CreateInstanceWithValidationLayers();
 }
 
 
-void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice(std::function<bool(VkPhysicalDevice)> predicate) {
+void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice() {
 	uint32 count;
 	vkEnumeratePhysicalDevices(instance, &count, nullptr);
 
@@ -21,8 +21,9 @@ void PhysicalDevicesAndQueueFamilies::GetPhysicalDevice(std::function<bool(VkPhy
 	vkEnumeratePhysicalDevices(instance, &count, availablePhysicalDevices.data());
 
 	for (const auto& device : availablePhysicalDevices) {
-		if (predicate(device)) {
+		if (getPhysicalDevicePredicate(device)) {
 			physicalDevice = device;
+			Msg("Physical device found!");
 			break;
 		}
 	}
@@ -53,7 +54,7 @@ void PhysicalDevicesAndQueueFamilies::GetAvailableQueueFamilies(VkPhysicalDevice
 
 
 void PhysicalDevicesAndQueueFamilies::Execute() {
-	GetPhysicalDevice(getPhysicalDevicePredicate);
+	GetPhysicalDevice();
 
 	VkPhysicalDeviceProperties properties;
 	VkPhysicalDeviceFeatures features;

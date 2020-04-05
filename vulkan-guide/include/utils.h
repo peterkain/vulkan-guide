@@ -3,6 +3,8 @@
 #include <tuple>
 #include "types.h"
 
+#define CLAMP(x, min, max) x = x > max ? max : x < min ? min : x;
+
 [[maybe_unused]]
 static void ExitMsg(conststr& msg) {
 	std::cerr << msg << '\n';

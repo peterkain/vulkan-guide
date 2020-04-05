@@ -12,6 +12,7 @@ public:
 	void Execute();
 
 protected:
+	Surface(conststr& name, uint32 version, [[maybe_unused]] bool _override);
 	void CreateSurface();
 
 	bool CheckPhysicalDevice(VkPhysicalDevice device);
