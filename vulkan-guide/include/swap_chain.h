@@ -8,7 +8,7 @@ class SwapChain : public Surface
 {
 public:
 	SwapChain(conststr& name, uint32 version);
-	~SwapChain();
+	virtual ~SwapChain();
 
 protected:
 	bool CheckPhysicalDevice(VkPhysicalDevice device);

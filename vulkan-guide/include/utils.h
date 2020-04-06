@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include <tuple>
+#include <fstream>
+#include <sstream>
+#include <vector>
 #include "types.h"
 
 #define CLAMP(x, min, max) x = x > max ? max : x < min ? min : x;
@@ -42,4 +45,14 @@ static std::tuple<uint32, uint32, uint32> GetVersion(uint32 vkVersion) {
 static void PrintVersion(std::ostream& os, uint32 vkVersion) {
 	auto versions{GetVersion(vkVersion)};
 	os << std::get<0>(versions) << '.' << std::get<1>(versions) << '.' << std::get<2>(versions) << '\n';
+}
+
+
+[[maybe_unused]]
+static std::vector<char> ReadSPV(conststr& filename) {
+	std::stringstream content;
+	content << std::ifstream{filename, std::ios::binary}.rdbuf();
+	std::string str{content.str()};
+
+	return std::vector<char>(str.begin(), str.end());
 }

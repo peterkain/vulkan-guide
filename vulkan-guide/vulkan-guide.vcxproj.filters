@@ -36,6 +36,12 @@
     <ClCompile Include="src\swap_chain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\image_views.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics_pipeline.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\vulkan_example.h">
@@ -66,6 +72,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\swap_chain_support_details.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\image_views.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_pipeline.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vulkan_helper.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
