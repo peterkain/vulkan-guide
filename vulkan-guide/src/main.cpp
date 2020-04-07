@@ -25,10 +25,10 @@ int main() {
 		example.Execute();
 	}*/
 
-	{
+	/*{
 		PhysicalDevicesAndQueueFamilies example{"Choosing a Physical Device", VK_MAKE_VERSION(1, 0, 0)};
 		example.Execute();
-	}
+	}*/
 
 	/*{
 		LogicalDevice example{"Creating a logical device from the physical device", VK_MAKE_VERSION(1, 0, 0)};
@@ -60,10 +60,10 @@ int main() {
 		example.Execute();
 	}*/
 
-	/*{
+	{
 		Triangle example{"Creating the triangle!", VK_MAKE_VERSION(1, 0, 0)};
 		example.Execute();
-	}*/
+	}
 	
 	std::cin.get();
 }
