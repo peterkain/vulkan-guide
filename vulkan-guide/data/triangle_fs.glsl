@@ -12,5 +12,6 @@ void main() {
 	vec2 pos = gl_FragCoord.xy/resolution.xy;
 	float color = noise(pos);
 
-	fragColor = vec4(vec3(clamp(color * 2, 0.0, 0.5), 0.2, 0.0), 1.0);
+	//fragColor = vec4(vec3(clamp(color * 2, 0.0, 0.5), 0.2, 0.0), 1.0);
+	fragColor = vec4(0.0, sin(gl_FragCoord.x) / 3, cos(gl_FragCoord.y) / 2, 1.0);
 }
