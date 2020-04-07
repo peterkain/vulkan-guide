@@ -1,0 +1,4 @@
+option('vk_include_dir', type : 'string', value : '/usr/include', description : 'VK include dir')
+option('vk_lib_dir', type : 'string', value : '/usr/lib/x86_64-linux-gnu', description : 'VK lib dir')
+option('glfw_include_dir', type : 'string', value : '/usr/include', description : 'GLFW include dir')
+option('glfw_lib_dir', type : 'string', value : '/usr/lib/x86_64-linux-gnu', description : 'GLFW lib dir')

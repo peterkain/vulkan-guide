@@ -12,7 +12,7 @@ VulkanExample::VulkanExample(conststr& name, uint32 version)
 
 
 VulkanExample::VulkanExample(conststr& name, uint32 version, [[maybe_unused]] bool _override)
-	: name{name}, version{version}
+	: name{name}, version{version}, glfwWindow{nullptr}
 {
 	InitGLFW3();
 }
@@ -29,7 +29,7 @@ VulkanExample::~VulkanExample() {
 
 void VulkanExample::InitGLFW3() {
 	/*if (!glfwVulkanSupported()) {
-		ExitMsg("Vulkan ist auf dem System nicht unterstützt!");
+		ExitMsg("Vulkan ist auf dem System nicht unterstï¿½tzt!");
 	}*/
 	// Init GLFW
 	if (!glfwInit()) {
