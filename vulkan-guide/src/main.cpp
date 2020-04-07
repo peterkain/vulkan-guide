@@ -7,6 +7,8 @@
 #include "swap_chain.h"
 #include "image_views.h"
 #include "graphics_pipeline.h"
+#include "frame_and_command_buffers.h"
+#include "triangle.h"
 #include "utils.h"
 
 using namespace std;
@@ -48,8 +50,18 @@ int main() {
 		example.Execute();
 	}*/
 
-	{
+	/*{
 		GraphicsPipeline example{"Creating the graphics pipeline", VK_MAKE_VERSION(1, 0, 0)};
+		example.Execute();
+	}*/
+
+	/*{
+		FrameAndCommandBuffers example{"Creating frame and command buffers", VK_MAKE_VERSION(1, 0, 0)};
+		example.Execute();
+	}*/
+
+	{
+		Triangle example{"Creating the triangle!", VK_MAKE_VERSION(1, 0, 0)};
 		example.Execute();
 	}
 	

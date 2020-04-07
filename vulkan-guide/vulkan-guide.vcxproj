@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\frame_and_command_buffers.cpp" />
     <ClCompile Include="src\graphics_pipeline.cpp" />
     <ClCompile Include="src\image_views.cpp" />
     <ClCompile Include="src\logical_device.cpp" />
@@ -140,10 +141,12 @@
     <ClCompile Include="src\physical_devices_and_queue_families.cpp" />
     <ClCompile Include="src\surface.cpp" />
     <ClCompile Include="src\swap_chain.cpp" />
+    <ClCompile Include="src\triangle.cpp" />
     <ClCompile Include="src\validation_layers.cpp" />
     <ClCompile Include="src\vulkan_example.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\frame_and_command_buffers.h" />
     <ClInclude Include="include\graphics_pipeline.h" />
     <ClInclude Include="include\image_views.h" />
     <ClInclude Include="include\logical_device.h" />
@@ -152,6 +155,7 @@
     <ClInclude Include="include\surface.h" />
     <ClInclude Include="include\swap_chain.h" />
     <ClInclude Include="include\swap_chain_support_details.h" />
+    <ClInclude Include="include\triangle.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="include\validation_layers.h" />

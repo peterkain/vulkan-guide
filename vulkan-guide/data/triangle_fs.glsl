@@ -1,9 +1,16 @@
 #version 450
-#extension GL_ARB_separate_shader_objects : enable
 
-layout(location = 0) in vec3 color;
 layout(location = 0) out vec4 fragColor;
 
+vec2 resolution = vec2(256.0, 256.0);
+
+float noise(vec2 pos) {
+	return fract(sin(dot(pos.xy, vec2(12.34, 56.789))));
+}
+
 void main() {
-	fragColor = vec4(color, 1.0);
+	vec2 pos = gl_FragCoord.xy/resolution.xy;
+	float color = noise(pos);
+
+	fragColor = vec4(vec3(clamp(color * 2, 0.0, 0.5), 0.2, 0.0), 1.0);
 }
