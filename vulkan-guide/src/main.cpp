@@ -20,10 +20,10 @@ int main() {
 		example.Execute();
 	}*/
 
-	/*{
+	{
 		ValidationLayers example{"Using Validation Layers", VK_MAKE_VERSION(1, 0, 0)};
 		example.Execute();
-	}*/
+	}
 
 	/*{
 		PhysicalDevicesAndQueueFamilies example{"Choosing a Physical Device", VK_MAKE_VERSION(1, 0, 0)};
@@ -60,10 +60,10 @@ int main() {
 		example.Execute();
 	}*/
 
-	{
+	/*{
 		Triangle example{"Creating the triangle!", VK_MAKE_VERSION(1, 0, 0)};
 		example.Execute();
-	}
+	}*/
 	
 	std::cin.get();
 }
