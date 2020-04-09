@@ -37,7 +37,7 @@ void Triangle::Draw() {
 	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
 	VkSemaphore* preconditions{&imageAvailable};
-	VkPipelineStageFlags requiredStage{VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+	VkPipelineStageFlags requiredStage{VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT};
 	submitInfo.waitSemaphoreCount = 1;
 	submitInfo.pWaitSemaphores = preconditions;
 	submitInfo.pWaitDstStageMask = &requiredStage;

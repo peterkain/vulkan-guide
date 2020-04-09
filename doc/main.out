@@ -17,4 +17,9 @@
 \BOOKMARK [2][-]{subsection.5.1.1}{Erstellen eines RenderPass Objekts}{section.5.1}% 17
 \BOOKMARK [2][-]{subsection.5.1.2}{Erstellen der restlichen Grafikpipeline}{section.5.1}% 18
 \BOOKMARK [0][-]{chapter.6}{Frame- und Commandbuffers}{}% 19
-\BOOKMARK [0][-]{chapter.7}{Das Dreieck}{}% 20
+\BOOKMARK [1][-]{section.6.1}{Erstellen von Image Views}{chapter.6}% 20
+\BOOKMARK [1][-]{section.6.2}{Erstellen von Frame- und Commandbuffers}{chapter.6}% 21
+\BOOKMARK [2][-]{subsection.6.2.1}{Erstellen von Framebuffers}{section.6.2}% 22
+\BOOKMARK [2][-]{subsection.6.2.2}{Erstellen von Commandbuffers}{section.6.2}% 23
+\BOOKMARK [0][-]{chapter.7}{Das Dreieck}{}% 24
+\BOOKMARK [1][-]{section.7.1}{Zeichnen des Dreiecks}{chapter.7}% 25
