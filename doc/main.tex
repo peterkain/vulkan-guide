@@ -131,10 +131,86 @@ Jetzt heißt es wieder: Ein struct mit diesen Informationen ausfüllen. In dem F
 Nachdem wir dies sichergestellt haben, können wir anfangen, VkSwapchainCreateInfoKHR zu befüllen. Neben unserem VkSurfaceKHR Objekt und den ausgesuchten PresentModes usw. benötigt der struct weitere Informationen, wie die Schichten eines Bildes, wenn wir beispielsweise 3D Bilder rendern wollen, oder die imageUsage. Man kann direkt in die Swapchain rendern (in dem Fall auf VK\_IMAGE\_USAGE\_COLOR\_ATTACHMENT\_BIT setzen), oder, wenn man das Bild nach dem Rendern bearbeiten möchte (Post Processing), dieses später hinzufügen (VK\_IMAGE\_USAGE\_TRANSFER\_DST\_BIT).\\
 Wenn unsere QueueFamilies für Graphics und Presentation nicht die gleichen sind, müssen wir den Zugriff auf Bilder der Swapchain definieren. Wir wollen ja mit einer Queue die Bilder rendern und mit einer anderen Queue die Bilder der Swapchain zukommen lassen. Haben diese beiden Queues nicht dieselbe QueueFamily, kommt das zu Konflikten. Deshalb kann man zwischen VK\_SHARING\_MODE\_(CONCURRENT/EXCLUSIVE) wählen, sowie die Anzahl der queueFamilies und deren Indices angeben. Schließlich kann man, wenn man möchte, noch Transformationen vor dem Anzeigen angeben, sowie angeben, ob das Fenster anhand des Alphakanals durchsichtig sein soll (wie man zum Beispiel beim Linux Terminal einstellen kann), und, ob die Pixel, die sich beispielsweise hinter einem anderen Fenster befinden, uns egal sind, oder nicht (ersteres führt klarerweise zu besserer Performance).\\
 Jetzt bleibt uns nur noch ein Feld übrig: .oldSwapchain. Ich habe schonmal erwähnt, dass die Swapchain z.B. beim Vergrößern des Fensters z.B. ungültig werden kann. In dem Fall muss man sie neu erstellen, und die alte Swapchain bei dem Feld angeben. Da wir unsere erste Swapchain erstellen, befassen wir uns nicht damit und geben VK\_NULL\_HANDLE an.\\
-Fast zwei Seiten später können wir endlich ein VkSwapchainKHR Objekt mittels vkCreateSwapchainKHR erstellen, und die Bilder der Swapchain für das spätere Rendering mittels vkGetSwapchainImagesKHR bekommen.
+Fast zwei Seiten später können wir endlich ein VkSwapchainKHR Objekt mittels vkCreateSwapchainKHR erstellen, und Zugriff auf die Bilder der Swapchain für das spätere Rendering mittels vkGetSwapchainImagesKHR bekommen.
+
+\chapter{Die Grafikpipeline}
+Die Grafikpipeline ist wohl der größte Brocken an Konfiguration in Vulkan. Ich werde versuchen, in diesem Kapitel eher oberflächlich zu bleiben, um es nicht unnötig lang zu machen. Die Grundsätze von Vulkan haben wir mittlerweile verstanden. Es sind wieder einmal structs auszufüllen, und zwar sehr viele structs. Die Grafikpipeline selbst beschreibt die Schritte, wie man von rohen Daten zu einem Bild am Bildschirm kommt. Wir werden in diesem Kapitel auch mit Shadern arbeiten. Shader sind Programme, die auf der Grafikkarte laufen und werden üblicherweise von Menschen geschrieben, sind also programmierbar. Neben programmierbaren Schritten in der Grafikpipeline gibt es auch nicht programmierbare. Dazu zählen die Schritte Input Assembler, Rasterization und Color Blending. Diese kann man nicht programmieren, aber konfigurieren. Die einzigen, wirklich optionalen, Schritte sind Tessellation Shader und Geometry Shader. Diese braucht man für spezielle Techniken in 3D Grafik, wie zum Beispiel Fell simulieren mithilfe von Geometry Shadern oder für Objekte mit "Tiefe", wie zum Beispiel eine Ziegelsteintextur auf einer flachen Wand realistisch aussehen zu lassen, mithilfe von Tessellation Shadern.\\
+Wir werden uns daher "nur" mit Vertex und Fragment Shadern auseinandersetzen. Ein Vertex Shader übernimmt und transformiert die Eckpunkte, die er von der Input Assembler Schicht bekommen hat, und ein Fragment Shader bestimmt die Farbe der zurückgelieferten Pixel der Rasterization Schicht. Fragment Shader können sehr komplex sein und beinhalten die meisten Effekte, wie zum Beispiel Nebel oder Beleuchtung. Ich habe die Shader in GLSL verfasst, der OpenGL Shading Language, man kann jedoch Shader für Vulkan in allen unterstützten Sprachen schreiben, da diese mithilfe eines Compilers auf ein Format, nämlich dem Bytecode SPIR-V, gebracht werden. Für GLSL gibt es unter anderem das im LunarG SDK existierende Programm glslc, welches von Google entwickelt wurde und ich verwendet habe. Diese Arbeit soll natürlich kein GLSL Tutorial sein, aber es ist wichtig, zu verstehen, was genau passiert:\\
+Im Vertex Shader (data/triangle\_vs.glsl) ist es wichtig, zu verstehen, dass wir eigentlich eine Schicht der Grafikpipeline auslassen. Die Eckpunkte sind dabei im Vertex Shader definiert, und nicht, wie üblich, in einem Vertex Buffer. Das liegt einfach daran, dass man den Vertex Buffer wieder einmal selbst erstellen muss, und, da man das so umgehen kann, das ein schnellerer Weg zum ersten Dreieck ist. Das wird Auswirkungen auf unsere Konfiguration der Grafikpipeline haben, wie wir später sehen werden. Jeder Shader in GLSL hat, wegen des Einflusses der Programmiersprache C, auch eine main Funktion, die wir später als Einstiegspunkt definieren werden.\\
+\newpage
+Im Vertex Shader, der für jeden Vertex (Eckpunkt) ausgeführt wird, definieren wir die gl\_Position des Vertex. Dabei bedienen wir uns der Variable gl\_VertexIndex, die den Index des jetzigen Vertex darstellt. Das passt perfekt zur Indizierung des Arrays. Der Datentyp "vec" steht dabei klarerweise für "Vektor".\\
+Im Fragment Shader tut sich zu viel für ein Tutorial, da hab ich mich ein wenig gespielt. Wenn wir jedoch alles ignorieren: Was müssen wir im Fragment Shader angeben? Die Farbe des Pixels. Der Fragment Shader wird für jeden Pixel (der von der Rasterization Schicht für die Vertices zurückgeliefert wurde) ausgeführt. Da kommt die hohe Nebenläufigkeit der Grafikkarte ins Spiel (da das der Fall ist, hat kein Shader des Pixels 123 Informationen über den Shader des Pixels 124 z.B, Shader sind also voneinander abgeschottet). Um zum Output des Fragment Shaders zurückzukommen: Wir müssen in der main Funktion angeben, welche Farbe der Pixel haben soll. Das geht einfach, indem wir eine als Output angeben und deren Wert in main setzen. Das ist einfach ein vec4 mit rgba von 0.0 bis 1.0 statt 0 bis 255. Bei rot hätten wir also "farbe = vec4(1.0, 0.0, 0.0, 1.0)". Weiters sehen wir "layout(location = 0)". Das wird uns schon bald mehr sagen.\\
+Mehr Informationen zu Fragment Shadern und deren Möglichkeiten finden sich im exzellenten \href{https://thebookofshaders.com/}{Book of Shaders}\\
+Die Sections dieses Kapitels beschreiben die Beispiele:
+\begin{enumerate}
+	\item{graphics\_pipeline}
+\end{enumerate}
+
+\section{Erstellen der Grafikpipeline}
+\subsection{Erstellen eines RenderPass Objekts}
+Ein RenderPass ist quasi eine Sammlung von Attachments, Subpasses und Dependencies zwischen Subpasses. Dependencies sind zum synchronisieren von zwei Subpasses zuständig. Attachments werden von Subpasses verwendet. Das Color Attachment, welches wir verwenden, sagt zum Beispiel unter Anderem aus, was beim Lesen und Schreiben des Images des Swapchain passieren soll. Wenn wir es lesen, wollen wir es beispielsweise erst Clearen ("Löschen", mit einer Farbe überschreiben). Wenn wir es wieder zurück schreiben wollen wir es speichern. Dafür gibt es auch mehrere andere Optionen. Ein Subpass ist als Renderingphase zu sehen.\\Es gibt die structs VkAttachmentDescription, quasi die eigentlichen Attachments, VkAttachmentReference, eine Referenz auf das Attachment, welche an das nächste struct, VkSubpassDescription weitergegeben werden kann. VkSubpassDescription beschreibt einfach den Subpass. Dann gibt es noch VkSubpassDependency, welche die dependency zwischen Subpasses beschreibt. Diese drei structs (VkAttachmentDescription, VkSubpassDescription und VkSubpassDependency) gibt man beim struct VkRenderPassCreateInfo an, welches zum Erstellen eines RenderPass Objekts mittels vkCreateRenderPass gebraucht wird.
+
+\subsection{Erstellen der restlichen Grafikpipeline}
+Nachdem wir uns so kurz wie möglich mit RenderPasses beschäftigt haben, können wir uns jetzt auf die eigentliche Grafikpipeline konzentrieren. Die Methode "CreateGraphicsPipeline" beginnt damit, die Shader zu laden. Dabei geben wir mit "main" auch den Einstiegspunkt an. Ich habe für das Laden der Shader auch eine eigene Klasse definiert, damit wir einen Destruktor haben. Diese ShaderModules werden am Ende der Funktion nämlich nicht mehr gebraucht. Danach folgt eine Menge an Schritten, die in Funktionen aufgeteilt sind. Das ist so geplant, dass man die Funktionen quasi als Module sieht, die man auch austauschen kann, sollte man eine andere Funktionalität benötigen, so wie es bei den Beispielen mit dem Überprüfen des physical devices ist, wenn man sich den Code schon mal genauer angeschaut hat. Die Default Funktionen sind alle am Ende der Datei zu finden. Man bedenke noch einmal, dass wir es nicht mehr mit programmierbaren Schichten der Grafikpipeline zu tun haben, sondern nur noch konfigurieren können. So füllt jede Funktion ein oder mehrere struct und liefert diese zurück.\\
+Wir werden jede der Funktionen kurz durchgehen:
+\begin{enumerate}
+	\item setupVertexBuffer()
+	\item setupInputAssembly()
+	\item setupViewportScissorInfo()
+	\item setupViewport()
+	\item setupRasterizer()
+	\item setupMultisampling()
+	\item setupColorBlendAttachment()
+	\item setupColorBlending()
+	\item setupPipelineLayout()
+\end{enumerate}
+
+\subsubsection{setupVertexBuffer}
+Liefert ein VkPipelineVertexInputStateCreateInfo struct\\
+Diese Funktion würde den VertexBuffer beschreiben, den wir normalerweise verwenden würden, wie zum Beispiel, der Typ (und somit die Größe) von Vertex Data (Wir können nicht nur Positionen mitgeben, sondern zum Beispiel auch Farben pro Vertex (werden dann interpoliert), oder, wenn man sich mit Texturen beschäftigt, wird man auch Texture Koordinaten brauchen. Die Größe von den gesamten Daten, sowie von den einzelnen Daten ist somit äußerst wichtig). Da wir in dem Fall keinen Vertex Buffer verwenden, gibt es auch nichts zu beschreiben.
+
+\subsubsection{setupInputAssembly}
+Liefert ein VkPipelineInputAssemblyStateCreateInfo struct\\
+Ganz überspringen können wir diese Schicht trotzdem nicht, denn sie enthält Informationen, wie die Eckpunkte interpretiert werden sollen. Wir haben uns dazu entschieden, dass jeweils drei Eckpunkte ein Dreieck definieren, man könnte aber auch zum Beispiel jeden Eckpunkt als Punkt sehen, oder jeweils zwei als Linie. Das wird hier angegeben.
+
+\subsubsection{setupViewportScissorInfo}
+Liefert ein VkViewport struct und ein VkRect2D struct\\
+Die zurückgelieferten Daten dieser Funktion werden von der nächsten verwendet. Sie benötigt außerdem ein VkExtent2D Objekt (wir können einfach das von der Swapchain angeben). Diese Funktion beschreibt die Größe des Bereiches, in den wir rendern wollen. Der Viewport ist dabei der Bereich, in dem ein Bild angezeigt wird, die Scissor ist der Bereich des Viewports, der angezeigt wird. Dabei hängt die Scissor nicht vom Viewport ab. Deckt also die Scissor den Viewport ab, jedoch nicht die gesamte Fläche des Fensters, wird trotzdem alles vom Viewport gezeichnet werden. Zur Konfiguration gibt man einfach die vier Punkte eines Rechtecks an, welches diese Objekte darstellt und begrenzt. Zusätzlich hat der Viewport noch eine .(max/min)Depth für die Z-Koordinate von 3D Szenen.
+
+\subsubsection{setupViewport}
+Liefert ein VkPipelineViewportStateCreateInfo struct\\
+Hier werden einfach die beiden structs aus der vorigen Funktion angegeben. Nicht mehr. Nicht weniger.
+
+\subsubsection{setupRasterizer}
+Liefert ein VkPipelineRasterizationStateCreateInfo struct\\
+Hier werden Informationen angegeben, wie Informationen über die Art der Rasterization, die man haben will: Will man zum Beispiel eine Fläche gefüllt, oder nur die Linien zwischen Eckpunkten (Wireframe)? Wir wollen in dem Fall eine gefüllte Fläche. Eine wichtige Konfiguration ist noch Culling. Culling ist das "weglassen" von unnötiger Information. Ein 3D Objekt, zum Beispiel: Wir haben eine zweidimensionale Fläche zum Rendern. Man kann sich das wie ein Foto eines 3D Objektes vorstellen. Man sieht nur einen Teil, der Rest ist verdeckt. Dieser verdeckte Rest muss nicht unbedingt gezeichnet werden. Das bringt ein Plus an Performance. Wir müssen nur angeben, ob wir den vorderen (nicht verdeckten) oder den hinteren (verdeckten) Teil cullen wollen und müssen noch definieren, was denn ein vorderer Teil ist. Das geschieht anhand der Reihenfolge der Eckpunkte. In unserem Fall: Wenn die Eckpunkte im Uhrzeigersinn gezeichnet werden, ist die Fläche der Vorderteil des Objektes und wird (in unserem Fall) also nicht gecullt. Stellt man sich jetzt vor, man begibt sich hinter das Object, so sind die Eckpunkte nicht mehr im Uhrzeigersinn gezeichnet, sondern gegen den Uhrzeigersinn gezeichnet (Leicht mit dem Dreieck vorstellbar). Das heißt, wir befinden uns vor der Rückseite des Objektes. Das Dreieck würden wir mittlerweile nicht sehen, das wird gerade "weggecullt".
+
+\subsubsection{setupMultisampling}
+Liefert ein VkPipelineMultisampleStateCreateInfo struct\\
+Benötigt man nicht unbedingt, dient zur Kantenglättung. Wenn man es aktivieren möchte, ist das ein eigenes physical device Feature. Da wir es nicht brauchen, tut sich hier nicht viel.
+
+\subsubsection{setupColorBlendAttachment}
+Liefert ein VkPipelineColorBlendAttachmentState struct\\
+Dieses struct brauchen wir für die Color Blending Schicht. Color Blending passiert, wenn die Farbe, die ein Fragment Shader für einen Pixel zurückliefert mit einer schon vorhandenen Farbe des Pixels kombiniert werden muss. Den Blendvorgang kann man dabei ziemlich frei konfigurieren, es gibt verschiedene Arten, die beiden Farben zu mischen. Für ein simples Dreieck braucht man diese Mischvorgänge in dieser komplexen Form nicht, so deaktivieren wir sie und sorgen einfach dafür, dass die Farbe eines Pixels des Bilds mit der vom Fragment Shader zurückgelieferten Farbe überschrieben wird. Damit dies jedem der rgba Farbkanäle passiert, geben wir eine .colorWriteMask an.
+
+\subsubsection{setupColorBlending}
+Liefert ein VkPipelineColorBlendStateCreateInfo struct\\
+In dieser Funktion geben wir die Anzahl der ColorBlendAttachments der vorigen Funktion (in unserem Fall nur eines), sowie die ColorBlendAttachments selbst an.
+
+\subsubsection{setupPipelineLayout}
+Liefert ein VkPipelineLayoutCreateInfo struct\\
+Ein Pipeline Layout würde man brauchen, wenn man z.B. uniform Werte in Shadern verwendet. Uniform Werte können laufend von Programm aktualisiert werden. Beispiele dafür sind z.B. Zeit (Für Animationen oder Farben in Shadern), oder, wenn man sich später mit Texturen beschäftigt, für Texturen, die man im Hauptprogramm lädt und dann an die Grafikkarte sendet (sampler2D). Da wir das alles für ein Dreieck nicht brauchen, ist diese Funktion wiederum ziemlich verständlich gehalten.
+
+\subsubsection{Rückblick}
+Wir sehen also, obwohl wir nicht alle Schichten benötigen, verlangt Vulkan trotzdem ein explizites Setup der Grafikpipeline. Nachdem wir alle Informationen beisammen haben, besteht das Erstellen der Pipeline nur noch aus simplen Zuweisungen.
+
+\subsubsection{Das Finale}
+Zum Schluss müssen wir nur noch zwei Objekte erstellen: Einmal das VkPipelineLayout und einmal die VkPipeline selbst. Ersteres kann man mit vkCreatePipelineLayout erstellen, da wir ja schon ein VkPipelineLayoutCreateInfo befüllt haben. Bevor wir das zweite Objekt mit vkCreateGraphicsPipelines erstellen können, müssen wir noch ein VkGraphicsPipelineCreateInfo struct füllen.\\
+Erst einmal kehren wir zu den Shadern zurück. Wir haben für jeden Shader ein ShaderModule erstellt, müssen aber noch den Einstiegspunkt und den Typ des Shaders, also Vertex oder Fragment Shader angeben. Das können wir in VkPipelineShaderStageCreateInfo structs ausfüllen. Dafür habe ich eine Funktion im vulkan\_helper header geschrieben, die für uns so ein struct ausfüllt. Da wir für jeden Shader diese Informationen angeben müssen, haben wir also zwei VkPipelineShaderStageCreateInfo structs. Diese geben wir zusammen mit der Anzahl dem VkGraphicsPipelineCreateInfo struct weiter. Der Rest ist zum Ausfüllen mit unseren bereits bestehenden structs. Das Attribut .subpass gibt den Index der Subpasses an, für den die Graphics Pipeline verwendet wird. Da wir nur einen subpass haben, geben wir als Index 0 an. Vulkan bietet einem außerdem die Möglichkeit, eine GraphicsPipeline mithilfe einer bereits bestehenden GraphicsPipeline zu erstellen, wenn die beiden Pipelines beispielsweise viel Gemeinsamkeiten haben. Dafür sind die beiden letzten Attribute da, die wir aber nicht verwenden müssen.\\
+Nach einem Abschließenden Aufruf von vkCreateGraphicsPipelines haben wir unsere GraphicsPipeline erstellt und sind damit fast am Ende der Reise zum Dreieck gelangt.
+
 
 \chapter{Frame- und Commandbuffers}
-\chapter{Die Grafikpipeline}
 \chapter{Das Dreieck}
 
 

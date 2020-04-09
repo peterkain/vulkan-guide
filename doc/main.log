@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.10.28)  9 APR 2020 13:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.10.28)  9 APR 2020 17:00
 entering extended mode
 **./main.tex
 (main.tex
@@ -401,42 +401,53 @@ ar ist der Mo-dus VK[]PRESENT[]MODE[]FIFO[]KHR,
 
 [10] [11]
 Kapitel 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--140
+
+ []
+
 [12
 
 ]
+Overfull \hbox (9.20158pt too wide) in paragraph at lines 151--152
+\OT1/cmr/m/n/10.95 Es gibt die structs VkAttach-ment-De-s-crip-ti-on, qua-si di
+e ei-gent-li-chen At-tach-ments, VkAttach-
+ []
+
+[13] [14] [15] [16] [17]
 Kapitel 6.
-[13
+[18
 
 ]
 Kapitel 7.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 142.
-[14
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 217.
+[19
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 142.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 217.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 142.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 217.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 217.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B59C1BF5B1309075AE9D24D043CE609F;1096.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 142.
+(rerunfilecheck)             Checksum: 35CC8F02F5F118CEC0548AFDCEC2B4C4;1352.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 217.
  ) 
 Here is how much of TeX's memory you used:
- 7734 strings out of 492452
- 110262 string characters out of 3134015
+ 7778 strings out of 492452
+ 110749 string characters out of 3134015
  326552 words of memory out of 3000000
- 11989 multiletter control sequences out of 15000+200000
- 9716 words of font info for 34 fonts, out of 3000000 for 9000
+ 12004 multiletter control sequences out of 15000+200000
+ 10023 words of font info for 35 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,60p,944b,1294s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,6n,60p,1415b,1294s stack positions out of 5000i,500n,10000p,200000b,50000s
 <H:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><H:/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><H:/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmr10.pfb><H:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmr12.pfb><H:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><H:/Pro
 grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (15 pages, 140726 bytes).
+Output written on main.pdf (20 pages, 164294 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 273 PDF objects out of 1000 (max. 8388607)
+ 76 named destinations out of 1000 (max. 500000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 

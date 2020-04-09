@@ -12,6 +12,9 @@
 \BOOKMARK [0][-]{chapter.4}{Die Swapchain}{}% 12
 \BOOKMARK [1][-]{section.4.1}{Erstellen eines Surface}{chapter.4}% 13
 \BOOKMARK [1][-]{section.4.2}{Erstellen der Swapchain}{chapter.4}% 14
-\BOOKMARK [0][-]{chapter.5}{Frame- und Commandbuffers}{}% 15
-\BOOKMARK [0][-]{chapter.6}{Die Grafikpipeline}{}% 16
-\BOOKMARK [0][-]{chapter.7}{Das Dreieck}{}% 17
+\BOOKMARK [0][-]{chapter.5}{Die Grafikpipeline}{}% 15
+\BOOKMARK [1][-]{section.5.1}{Erstellen der Grafikpipeline}{chapter.5}% 16
+\BOOKMARK [2][-]{subsection.5.1.1}{Erstellen eines RenderPass Objekts}{section.5.1}% 17
+\BOOKMARK [2][-]{subsection.5.1.2}{Erstellen der restlichen Grafikpipeline}{section.5.1}% 18
+\BOOKMARK [0][-]{chapter.6}{Frame- und Commandbuffers}{}% 19
+\BOOKMARK [0][-]{chapter.7}{Das Dreieck}{}% 20

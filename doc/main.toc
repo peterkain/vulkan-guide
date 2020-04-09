@@ -13,6 +13,20 @@
 \contentsline {chapter}{\numberline {4}Die Swapchain}{8}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Erstellen eines Surface}{8}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Erstellen der Swapchain}{10}{section.4.2}% 
-\contentsline {chapter}{\numberline {5}Frame- und Commandbuffers}{12}{chapter.5}% 
-\contentsline {chapter}{\numberline {6}Die Grafikpipeline}{13}{chapter.6}% 
-\contentsline {chapter}{\numberline {7}Das Dreieck}{14}{chapter.7}% 
+\contentsline {chapter}{\numberline {5}Die Grafikpipeline}{12}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Erstellen der Grafikpipeline}{13}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Erstellen eines RenderPass Objekts}{13}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Erstellen der restlichen Grafikpipeline}{13}{subsection.5.1.2}% 
+\contentsline {subsubsection}{setupVertexBuffer}{14}{section*.2}% 
+\contentsline {subsubsection}{setupInputAssembly}{14}{section*.3}% 
+\contentsline {subsubsection}{setupViewportScissorInfo}{15}{section*.4}% 
+\contentsline {subsubsection}{setupViewport}{15}{section*.5}% 
+\contentsline {subsubsection}{setupRasterizer}{15}{section*.6}% 
+\contentsline {subsubsection}{setupMultisampling}{15}{section*.7}% 
+\contentsline {subsubsection}{setupColorBlendAttachment}{16}{section*.8}% 
+\contentsline {subsubsection}{setupColorBlending}{16}{section*.9}% 
+\contentsline {subsubsection}{setupPipelineLayout}{16}{section*.10}% 
+\contentsline {subsubsection}{Rückblick}{16}{section*.11}% 
+\contentsline {subsubsection}{Das Finale}{16}{section*.12}% 
+\contentsline {chapter}{\numberline {6}Frame- und Commandbuffers}{18}{chapter.6}% 
+\contentsline {chapter}{\numberline {7}Das Dreieck}{19}{chapter.7}% 
