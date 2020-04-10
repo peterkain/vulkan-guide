@@ -46,6 +46,7 @@ bool ValidationLayers::CheckIfLayerValid(const char* const name) {
 void ValidationLayers::AddValidationLayer(const char* const name) {
 	if (CheckIfLayerValid(name)) {
 		validationLayers.push_back(name);
+		std::cout << "Adding validation layer: " << name << std::endl;
 	}
 }
 

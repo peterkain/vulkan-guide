@@ -21,5 +21,8 @@ protected:
 	std::vector<const char*> validationLayers;
 	std::vector<VkLayerProperties> availableLayers;
 
-	const char* const standardValidationLayer{"VK_LAYER_KHRONOS_validation"};
+	const char* const khronosValidationLayer{"VK_LAYER_KHRONOS_validation"}; 
+	const char* const lunargCoreValidationLayer{"VK_LAYER_LUNARG_core_validation"};
+	const char* const lunargApiDumpValidationLayer{"VK_LAYER_LUNARG_api_dump"};
+	const char* const lunargParameterValidationLayer{"VK_LAYER_LUNARG_parameter_validation"};
 };

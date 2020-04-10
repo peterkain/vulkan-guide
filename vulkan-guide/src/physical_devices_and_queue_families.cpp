@@ -4,7 +4,11 @@
 
 PhysicalDevicesAndQueueFamilies::PhysicalDevicesAndQueueFamilies(conststr& name, uint32 version)
 	: ValidationLayers(name, version), physicalDevice{VK_NULL_HANDLE} {
-	AddValidationLayer(standardValidationLayer);
+	AddValidationLayer(khronosValidationLayer);
+	AddValidationLayer("VK_LAYER_LUNARG_standard_validation");
+	AddValidationLayer(lunargApiDumpValidationLayer);
+	AddValidationLayer(lunargCoreValidationLayer);
+	AddValidationLayer(lunargParameterValidationLayer);
 	CreateInstanceWithValidationLayers();
 }
 
