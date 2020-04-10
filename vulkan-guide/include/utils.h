@@ -49,10 +49,10 @@ static void PrintVersion(std::ostream& os, uint32 vkVersion) {
 
 
 [[maybe_unused]]
-static std::vector<char> ReadSPV(conststr& filename) {
+static std::vector<uint8_t> ReadSPV(conststr& filename) {
 	std::stringstream content;
 	content << std::ifstream{filename, std::ios::binary}.rdbuf();
 	std::string str{content.str()};
 
-	return std::vector<char>(str.begin(), str.end());
+	return std::vector<uint8_t>(str.begin(), str.end());
 }

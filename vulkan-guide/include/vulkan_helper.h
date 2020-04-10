@@ -10,9 +10,10 @@ struct MyShaderModule
 
 		VkShaderModuleCreateInfo info{};
 		info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-		info.codeSize = spv.size() * sizeof(*spv.data());
-		std::cout << spv.size() * sizeof(*spv.data()) << std::endl;
+		info.codeSize = spv.size();
 		info.pCode = reinterpret_cast<const uint32*>(spv.data());
+
+		std::cout << "Codesize for " << path << ": " << info.codeSize << std::endl;
 
 		if (vkCreateShaderModule(*logicalDevice, &info, nullptr, &shaderModule) != VK_SUCCESS) {
 			ExitMsg("Failed to create shader module");
