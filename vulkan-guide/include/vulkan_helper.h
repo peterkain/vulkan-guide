@@ -5,12 +5,13 @@
 
 struct MyShaderModule
 {
-	MyShaderModule(conststr& path, VkDevice* const device) : logicalDevice{device} {
+	MyShaderModule(conststr& path, VkDevice* device) : logicalDevice{device} {
 		auto spv{ReadSPV(path)};
 
 		VkShaderModuleCreateInfo info{};
 		info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-		info.codeSize = spv.size();
+		info.codeSize = spv.size() * sizeof(*spv.data());
+		std::cout << spv.size() * sizeof(*spv.data()) << std::endl;
 		info.pCode = reinterpret_cast<const uint32*>(spv.data());
 
 		if (vkCreateShaderModule(*logicalDevice, &info, nullptr, &shaderModule) != VK_SUCCESS) {
@@ -26,7 +27,7 @@ struct MyShaderModule
 	}
 
 	VkShaderModule shaderModule;
-	VkDevice* const logicalDevice;
+	VkDevice* logicalDevice;
 };
 
 
