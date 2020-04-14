@@ -50,9 +50,15 @@ static void PrintVersion(std::ostream& os, uint32 vkVersion) {
 
 [[maybe_unused]]
 static std::vector<uint8_t> ReadSPV(conststr& filename) {
-	std::stringstream content;
-	content << std::ifstream{filename, std::ios::binary}.rdbuf();
-	std::string str{content.str()};
+	std::ifstream file{filename, std::ios::binary};
 
+	if (!file.good()) {
+		ExitMsg("File " + filename + " not found (make sure that the data folder is in the same folder as the executable)");
+	}
+
+	std::stringstream content;
+	content << file.rdbuf();
+
+	std::string str{content.str()};
 	return std::vector<uint8_t>(str.begin(), str.end());
 }

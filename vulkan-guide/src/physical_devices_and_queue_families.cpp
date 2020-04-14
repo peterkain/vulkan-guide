@@ -6,7 +6,7 @@ PhysicalDevicesAndQueueFamilies::PhysicalDevicesAndQueueFamilies(conststr& name,
 	: ValidationLayers(name, version), physicalDevice{VK_NULL_HANDLE} {
 	AddValidationLayer(khronosValidationLayer);
 	AddValidationLayer("VK_LAYER_LUNARG_standard_validation");
-	AddValidationLayer(lunargApiDumpValidationLayer);
+	//AddValidationLayer(lunargApiDumpValidationLayer);
 	AddValidationLayer(lunargCoreValidationLayer);
 	AddValidationLayer(lunargParameterValidationLayer);
 	CreateInstanceWithValidationLayers();
