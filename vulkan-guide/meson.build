@@ -13,11 +13,19 @@ if build_machine.system() == 'windows'
 	lib_dir = meson.current_source_dir() + '/extern/lib'
 	lib_vulkan = cc.find_library('vulkan-1', dirs : [get_option('vk_lib_dir'), lib_dir])
 	lib_glfw = cc.find_library('libglfw3', dirs : [get_option('glfw_lib_dir'), lib_dir])
+	result = run_command('cp', meson.current_source_dir() + 'data', meson.current_source_dir() + 'build') #, '-r')
+	if result.returncode() != 0
+		message('Failed to copy the data folder into the build folder. Please do so manually.')
+	endif
 endif
 if build_machine.system() == 'linux'
 	inc_dirs = include_directories(['include', get_option('vk_include_dir'), get_option('glfw_include_dir')])
     lib_vulkan = cc.find_library('libvulkan', dirs : [get_option('vk_lib_dir')])
 	lib_glfw = cc.find_library('libglfw', dirs : [get_option('glfw_lib_dir')])
+	result = run_command('cp', meson.current_source_dir() + 'data', meson.current_source_dir() + 'build') #, '-r')
+	if result.returncode() != 0
+		message('Failed to copy the data folder into the build folder. Please do so manually.')
+	endif
 endif
 
 executable('vkguide', sources : src, include_directories : inc_dirs,
