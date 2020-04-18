@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+\usepackage{graphicx}
+\usepackage{changepage}
 \usepackage{listings}
 \lstset{
 	language=C++,
@@ -58,7 +60,18 @@ Die Beispiele haben folgende Abhängigkeiten: \href{https://www.glfw.org/downloa
 Wozu man Vulkan braucht, sollte selbstverständlich sein. Spezifisch habe ich das Vulkan SDK von LunarG verwendet, weil es empfohlen wird und nicht nur die Notwendigkeiten für Vulkan (Bibliothek und Header), sondern auch Testprogramme und Compiler von GLSL auf SPIR-V (wie später besprochen wird) beinhaltet.
 
 \section{Was wird nicht besprochen}
-Diese Arbeit soll keine Dokumentation von Vulkan darstellen (die wäre viel zu umfangreich und im gegebenen Zeitrahmen nicht möglich), sondern vielmehr die Vorgehensweise behandeln, wie man zu den einzelnen Meilensteinen gelangt. Das beinhaltet beispielsweise: Welche Informationen man braucht, um ein Objekt zu erstellen. Jedoch nicht: Eine detaillierte Beschreibung jedes Attributs eines structs, welches man ausfüllen muss, um ein Objekt zu erstellen. Am Ende soll man vor allem den Code halbwegs verstanden haben, der in Form von Beispielen vorliegt.
+Diese Arbeit soll keine Dokumentation von Vulkan darstellen (die wäre viel zu umfangreich und im gegebenen Zeitrahmen nicht möglich), sondern vielmehr die Vorgehensweise behandeln, wie man zu den einzelnen Meilensteinen gelangt. Das beinhaltet beispielsweise: Welche Informationen man braucht, um ein Objekt zu erstellen. Jedoch nicht: Eine detaillierte Beschreibung jedes Attributs eines structs, welches man ausfüllen muss, um ein Objekt zu erstellen. Am Ende soll man vor allem den Code halbwegs verstanden haben, der in Form von Beispielen vorliegt:
+\newpage
+%\newgeometry{left=0.5cm,top=0.5cm,bottom=0.5cm,right=0.5cm}
+\begin{adjustwidth}{-2cm}{-2cm}
+\begin{center}
+	\includegraphics[scale=0.65]{class_dependency_diagram}
+\end{center}
+\end{adjustwidth}
+%\restoregeometry
+Diese Beispiele sind alle (fast) aufeinanderfolgend aufbauend (von VulkanExample zu Triangle) und bilden quasi den Weg, den man zum letzten Beispiel, dem Dreieck, beschreiten muss. Der Vorteil an dieser strikten Aufteilung ist es, dass man pro Beispiel nur den Code sieht, den man braucht, um das dem Beispielnamen entsprechende Ziel zu erfüllen.
+
+Das Ziel dieser Arbeit und deren Beispielen ist es, diesen Weg so kurz, aber auch so verständlich wie möglich zu erklären, womit auch gleichzeitig die Beispiele dokumentiert werden.
 
 \chapter{Interagieren mit der Grafikkarte}
 Mit Vulkan startet man (fast) von Null. Bevor man mit Rendering beginnen kann, muss man zuerst eine Hardware auswählen, welches man zum Rendern verwenden will (physical device). Das Ziel dieses Kapitels ist es, eine Schnittstelle zu dieser Hardware (logical device) zu erstellen. Man müsste für jedes physische Gerät ein logisches Gerät erstellen, aber Multi-GPU Rendering behandelt dieses Kapitel nicht. Da wir auch nicht in tiefere Gebiete, wie Geometry Shaders, vordringen, ist die einzige Vorraussetzung eine Grafikkarte mit Vulkan Support.\\
