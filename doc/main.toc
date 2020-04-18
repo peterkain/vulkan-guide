@@ -13,28 +13,28 @@
 \contentsline {chapter}{\numberline {4}Die Swapchain}{8}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Erstellen eines Surface}{8}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Erstellen der Swapchain}{10}{section.4.2}% 
-\contentsline {chapter}{\numberline {5}Die Grafikpipeline}{12}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Erstellen der Grafikpipeline}{13}{section.5.1}% 
-\contentsline {subsection}{\numberline {5.1.1}Erstellen eines RenderPass Objekts}{13}{subsection.5.1.1}% 
-\contentsline {subsection}{\numberline {5.1.2}Erstellen der restlichen Grafikpipeline}{13}{subsection.5.1.2}% 
-\contentsline {subsubsection}{setupVertexBuffer}{14}{section*.2}% 
-\contentsline {subsubsection}{setupInputAssembly}{14}{section*.3}% 
-\contentsline {subsubsection}{setupViewportScissorInfo}{15}{section*.4}% 
-\contentsline {subsubsection}{setupViewport}{15}{section*.5}% 
-\contentsline {subsubsection}{setupRasterizer}{15}{section*.6}% 
-\contentsline {subsubsection}{setupMultisampling}{15}{section*.7}% 
-\contentsline {subsubsection}{setupColorBlendAttachment}{16}{section*.8}% 
-\contentsline {subsubsection}{setupColorBlending}{16}{section*.9}% 
-\contentsline {subsubsection}{setupPipelineLayout}{16}{section*.10}% 
-\contentsline {subsubsection}{Rückblick}{16}{section*.11}% 
-\contentsline {subsubsection}{Das Finale}{16}{section*.12}% 
-\contentsline {chapter}{\numberline {6}Frame- und Commandbuffers}{18}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Erstellen von Image Views}{18}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Erstellen von Frame- und Commandbuffers}{19}{section.6.2}% 
-\contentsline {subsection}{\numberline {6.2.1}Erstellen von Framebuffers}{19}{subsection.6.2.1}% 
-\contentsline {subsection}{\numberline {6.2.2}Erstellen von Commandbuffers}{19}{subsection.6.2.2}% 
-\contentsline {subsubsection}{Erstellen eines Command Pools}{19}{section*.13}% 
-\contentsline {subsubsection}{Erstellen eines Commandbuffers}{19}{section*.14}% 
-\contentsline {subsubsection}{Aufzeichnen von Operationen}{20}{section*.15}% 
-\contentsline {chapter}{\numberline {7}Das Dreieck}{21}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Zeichnen des Dreiecks}{21}{section.7.1}% 
+\contentsline {chapter}{\numberline {5}Die Grafikpipeline}{13}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Erstellen der Grafikpipeline}{14}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Erstellen eines RenderPass Objekts}{14}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Erstellen der restlichen Grafikpipeline}{15}{subsection.5.1.2}% 
+\contentsline {subsubsection}{setupVertexBuffer}{15}{Item.16}% 
+\contentsline {subsubsection}{setupInputAssembly}{16}{Item.16}% 
+\contentsline {subsubsection}{setupViewportScissorInfo}{16}{Item.16}% 
+\contentsline {subsubsection}{setupViewport}{16}{Item.16}% 
+\contentsline {subsubsection}{setupRasterizer}{16}{Item.16}% 
+\contentsline {subsubsection}{setupMultisampling}{17}{Item.16}% 
+\contentsline {subsubsection}{setupColorBlendAttachment}{17}{Item.16}% 
+\contentsline {subsubsection}{setupColorBlending}{17}{Item.16}% 
+\contentsline {subsubsection}{setupPipelineLayout}{17}{Item.16}% 
+\contentsline {subsubsection}{Rückblick}{17}{Item.16}% 
+\contentsline {subsubsection}{Das Finale}{17}{Item.16}% 
+\contentsline {chapter}{\numberline {6}Frame- und Commandbuffers}{19}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Erstellen von Image Views}{19}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Erstellen von Frame- und Commandbuffers}{20}{section.6.2}% 
+\contentsline {subsection}{\numberline {6.2.1}Erstellen von Framebuffers}{20}{subsection.6.2.1}% 
+\contentsline {subsection}{\numberline {6.2.2}Erstellen von Commandbuffers}{20}{subsection.6.2.2}% 
+\contentsline {subsubsection}{Erstellen eines Command Pools}{20}{subsection.6.2.2}% 
+\contentsline {subsubsection}{Erstellen eines Commandbuffers}{20}{subsection.6.2.2}% 
+\contentsline {subsubsection}{Aufzeichnen von Operationen}{21}{subsection.6.2.2}% 
+\contentsline {chapter}{\numberline {7}Das Dreieck}{22}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Zeichnen des Dreiecks}{22}{section.7.1}% 
